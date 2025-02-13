@@ -1,6 +1,6 @@
 # NewsReader
 
-A SwiftUI application demonstrating a **Clean Architecture + MVVM** approach to fetching news articles from a remote API (e.g., New York Times), storing them in Core Data, and presenting them in a reactive list. The app includes a detail view, a custom Core Data FRC observer, and a unified approach for mapping API responses to Core Data entities and domain models.
+A SwiftUI application demonstrating a **Clean Architecture + MVVM** approach to fetch news articles from a remote API (e.g., New York Times), storing them in Core Data, and presenting them in a reactive list. The app includes a detail view, a custom Core Data FRC observer, and an unified approach for mapping API responses to Core Data entities and domain models.
 
 ---
 
@@ -34,7 +34,7 @@ This app follows **Clean Architecture** principles with an **MVVM** presentation
 - **Data Layer (Repository and Core Data)**  
   Implements data fetching, Core Data persistence, and entity → model mapping.  
   - **Core Data**: Houses entity definitions, the `PersistenceController`, and the `FetchResultControllerObserver` for reactive updates.
-  - **Repository Implementation**: Conforms the repository protocol, fetching from network APIs and saving/fetching in Core Data.
+  - **Repository Implementation**: Conforms the repository protocol that fetches data from network APIs and also saving/fetching data in local Core Data storage.
 
 - **Presentation Layer**  
   Uses MVVM with a `NewsListViewModel` for business logic and state updates, and SwiftUI views (`NewsArticleView`, `NewsArticleListRow`, `NewsArticleDetailView`) for UI rendering. Observes data changes via `FetchedResultsObserver` class.
@@ -66,7 +66,7 @@ This app follows **Clean Architecture** principles with an **MVVM** presentation
 
 3. **Repository**:  
    - **NewsArticleRepositoryImpl** decides whether to fetch from remote API datasource or local datasource(Core Data).  
-   - If it is from remote API, it parses the response and maps to domain model objects and saves the entities into Core Data.  
+   - If it is from a remote API, it parses the response and maps it to domain model objects and saves the entities into Core Data.  
    - Returns domain models to the **Use Case**.
 
 4. **Use Case**:  
@@ -77,7 +77,7 @@ This app follows **Clean Architecture** principles with an **MVVM** presentation
    - Changes in Core Data are observed via `FetchResultControllerObserver`, updating SwiftUI views in real-time.
 
 6. **UI**:  
-   - SwiftUI views observe published properties and the observer’s output, rendering a list of articles and a detail view.
+   - SwiftUI views observe published properties and the FRC observer’s output for rendering the list of articles and a detail view.
 
 ---
 
@@ -86,6 +86,7 @@ This app follows **Clean Architecture** principles with an **MVVM** presentation
 - **Swift 5+**  
 - **Xcode 14+** (recommended for modern SwiftUI features)  
 - **iOS 15+**
+- **API Key** to be generated from [NYTimes Dev Portal](https://developer.nytimes.com/) after signup. It needs to be replaced in the **APIManager** class
 
 No external third-party libraries. Only native Swift, SwiftUI, and Core Data.
 
