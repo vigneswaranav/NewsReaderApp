@@ -95,9 +95,9 @@ No external third-party libraries. Only native Swift, SwiftUI, and Core Data.
 
 ## Build and Run
 
-	1.	**Open Xcode** and select your target. \n
-	2.	Build: Press Cmd + B or click the Build button. \n
-	3.	Run: Press Cmd + R or click the Run button (choose iOS Simulator or a physical device). \n
-	4.	Observe: The app should fetch or display locally cached articles and update the UI automatically. \n
+1.	**Open Xcode** and select your target.
+2.	**Build:** Press Cmd + B or click the Build button.
+3.	**Run:** Press Cmd + R or click the Run button (choose iOS Simulator or a physical device).
+4.	**Observe:** The app should fetch or display locally cached articles and update the UI automatically.
 
 ## Test Cases
