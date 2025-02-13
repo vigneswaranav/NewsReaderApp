@@ -90,8 +90,10 @@ No external third-party libraries. Only native Swift, SwiftUI, and Core Data.
    git clone https://github.com/vigneswaranav/NewsReaderApp.git
    ```
 2.	Open the Project
-    cd NewsReader
-    open NewsReader.xcodeproj
+    1.	cd NewsReader
+    2.	open NewsReader.xcodeproj
+
+---
 
 ## Build and Run
 
@@ -99,5 +101,7 @@ No external third-party libraries. Only native Swift, SwiftUI, and Core Data.
 2.	**Build:** Press Cmd + B or click the Build button.
 3.	**Run:** Press Cmd + R or click the Run button (choose iOS Simulator or a physical device).
 4.	**Observe:** The app should fetch or display locally cached articles and update the UI automatically.
+
+---
 
 ## Test Cases
