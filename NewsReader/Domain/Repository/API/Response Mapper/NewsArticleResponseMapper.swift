@@ -10,19 +10,20 @@ class NewsArticleResponseMapper {
     static func map(_ response: NewsArticleResponse<NewsArticleModel>) -> [NewsArticleItem] {
         let articles: [NewsArticleItem] = response.results.map({ (result: NewsArticleModel) -> NewsArticleItem in
            
-            let media: [NewsArticleMediaModel] = result.media
-            let mediaItems: [NewsArticleMediaItem] = media.compactMap({ (media: NewsArticleMediaModel) -> NewsArticleMediaItem? in
+            let mediaModels: [NewsArticleMediaModel] = result.media
+            var mediaItems: [NewsArticleMediaItem] = []
+            for media in mediaModels {
                 guard let mediaType = NewsArticleMediaItem.MediaType(rawValue: media.type) else {
-                    return nil
+                    continue
                 }
                 for mediaMetadata in media.mediaMetadata {
                     guard let type = NewsArticleMediaItem.Kind.type(for: mediaMetadata.format) else {
                         continue
                     }
-                    return NewsArticleMediaItem(url: mediaMetadata.url, caption: media.caption, type: type, mediaType: mediaType)
+                    let item = NewsArticleMediaItem(url: mediaMetadata.url, caption: media.caption, type: type, mediaType: mediaType)
+                    mediaItems.append(item)
                 }
-                return nil
-            })
+            }
             
             return NewsArticleItem(
                 id: result.id,

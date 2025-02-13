@@ -19,11 +19,17 @@ struct NewsArticleItem: Identifiable {
     let media: [NewsArticleMediaItem]
     
     var coverImage: NewsArticleMediaItem? {
-        return media.first { $0.type == NewsArticleMediaItem.Kind.coverImage }
+        if let coverImage = media.first(where: { $0.type == NewsArticleMediaItem.Kind.coverImage }) {
+            return coverImage
+        }
+        return originalImage
     }
     
     var thumbnailImage: NewsArticleMediaItem? {
-        return media.first { $0.type == NewsArticleMediaItem.Kind.thumbnail }
+        if let thumbnailImage = media.first(where: { $0.type == NewsArticleMediaItem.Kind.thumbnail }) {
+            return thumbnailImage
+        }
+        return originalImage
     }
     
     var originalImage: NewsArticleMediaItem? {
