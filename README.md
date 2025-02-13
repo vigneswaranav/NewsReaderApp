@@ -12,7 +12,8 @@ A SwiftUI application demonstrating a **Clean Architecture + MVVM** approach to 
 4. [Requirements](#requirements)  
 5. [Setup and Configuration](#setup-and-configuration)  
 6. [Build and Run](#build-and-run)  
-7. [Test Cases](#test-cases)  
+7. [Test Cases](#test-cases)
+8. [Demo](#demo)
 
 ---
 
@@ -105,3 +106,10 @@ No external third-party libraries. Only native Swift, SwiftUI, and Core Data.
 ---
 
 ## Test Cases
+
+## Demo
+
+Below is a quick demonstration of the NewsReader app in action.
+This GIF shows how tapping the refresh button fetches new articles, populates the list, and updates the detail view seamlessly.
+
+![NewsReader_Demo](https://github.com/user-attachments/assets/40a68449-79d2-48de-865e-516df54da404)
