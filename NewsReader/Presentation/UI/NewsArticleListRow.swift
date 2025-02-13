@@ -13,15 +13,25 @@ struct NewsArticleListRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .center, spacing: 12) {
-                AsyncImage(url: URL(string: item.thumbnailImage?.url ?? "")) { image in
-                    image
+                if let media = (item.thumbnailImage ?? item.coverImage), let downloadURL = URL(string: media.url) {
+                    AsyncImage(url: downloadURL) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .clipShape(RoundedRectangle(cornerRadius: 30))
+                    } placeholder: {
+                        ProgressView()
+                    }.frame(width: 60, height: 60)
+                    .cornerRadius(30)
+                } else {
+                    Image(systemName: "photo.circle.fill")
                         .resizable()
                         .scaledToFit()
+                        .foregroundColor(.gray)
                         .clipShape(RoundedRectangle(cornerRadius: 30))
-                } placeholder: {
-                    ProgressView()
-                }.frame(width: 60, height: 60)
-                .cornerRadius(30)
+                        .frame(width: 60, height: 60)
+                        .cornerRadius(30)
+                }
                 VStack(alignment: .leading, spacing: 4) {
                     Text(item.title)
                         .font(.headline)

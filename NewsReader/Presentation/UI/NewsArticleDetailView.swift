@@ -11,6 +11,8 @@ import SwiftUI
 struct NewsArticleDetailView: View {
     let item: NewsArticleItem
     
+    @Environment(\.presentationMode) private var presentationMode
+    
     var body: some View {
         ScrollView {
             if let coverImageUrl = item.coverImage?.url, let url = URL(string: coverImageUrl) {
@@ -52,13 +54,24 @@ struct NewsArticleDetailView: View {
                     .foregroundStyle(.white)
             }
             .frame(width: UIScreen.main.bounds.width - 32, height: 50)
-                .background(Color.blue)
-                .clipped()
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .padding()
+            .background(Color.blue)
+            .clipped()
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .padding()
         }
         .navigationTitle(item.type)
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden()
+        .navigationBarItems(leading: Button {
+            presentationMode.wrappedValue.dismiss()
+        } label: {
+            HStack {
+                Image(systemName: "chevron.left")
+                    .foregroundStyle(.blue)
+                Text("Back")
+                    .foregroundStyle(.blue)
+            }
+        })
     }
 }
 

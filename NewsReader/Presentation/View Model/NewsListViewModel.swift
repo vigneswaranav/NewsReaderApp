@@ -32,11 +32,6 @@ class NewsArticleListViewModel: ObservableObject {
                 self.articles = newObjects
             }
             .store(in: &cancellables)
-       
-        Task { [weak self] in
-            guard let self else { return }
-            await self.loadArticles()
-        }
     }
     
     deinit {

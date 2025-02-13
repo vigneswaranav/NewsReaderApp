@@ -10,7 +10,6 @@ import SwiftUI
 import CoreData
 
 struct NewsArticleView: View {
-    @Environment(\.managedObjectContext) private var viewContext
     @StateObject var viewModel: NewsArticleListViewModel
     
     init(viewModel: NewsArticleListViewModel) {
@@ -19,23 +18,43 @@ struct NewsArticleView: View {
     
     var body: some View {
         ZStack {
-            NewsArticleListView(items: viewModel.articles)
+            NavigationSplitView {
+                List(viewModel.articles) { item in
+                    NavigationLink {
+                        NewsArticleDetailView(item: item)
+                    } label: {
+                        NewsArticleListRow(item: item)
+                    }
+                    .listRowInsets(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+                    .listRowSeparator(.hidden)
+                }.navigationTitle("NY Times Articles")
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {
+                                Task {
+                                    await viewModel.loadArticles()
+                                }
+                            }) {
+                                Label("Refresh", systemImage: "arrow.clockwise")
+                            }
+                            .accessibilityIdentifier("RefreshButton")
+                        }
+                    }
+            } detail: {
+                Text("Select an article")
+                    .font(.title)
+                    .foregroundColor(.secondary)
+            }
+            .onAppear {
+                Task {
+                    await viewModel.loadArticles()
+                }
+            }
             if viewModel.isLoading {
                 ProgressView("Loading...")
                     .progressViewStyle(CircularProgressViewStyle())
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color(.systemBackground).opacity(0.8))
-            }
-        }
-        .navigationTitle("NY Times Most Popular Articles")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    Task { await viewModel.loadArticles() }
-                }) {
-                    Label("Refresh", systemImage: "arrow.clockwise")
-                }
-                .accessibilityIdentifier("RefreshButton")
             }
         }
         .alert("Error", isPresented: Binding<Bool>(

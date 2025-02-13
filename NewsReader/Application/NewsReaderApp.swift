@@ -19,7 +19,6 @@ struct NewsReaderApp: App {
             let frcObserver = FetchResultControllerObserver(entityHandler: databaseHandler, context: PersistenceController.mainContext)
             let viewModel = NewsArticleListViewModel(fetchUseCase: fetchUseCase, frcObserver: frcObserver)
             NewsArticleView(viewModel: viewModel)
-                .environment(\.managedObjectContext, PersistenceController.mainContext)
         }
     }
 }
