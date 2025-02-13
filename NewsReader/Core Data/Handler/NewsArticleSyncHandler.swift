@@ -22,7 +22,7 @@ class NewsArticleSyncHandler: DatabaseHandler {
     }()
     
     var listSortedKeys: [[String : Any]] {
-        return [["value":"publishedDate", "type": 1, "sort": true], ["value":"updatedDate", "type": 1, "sort": true]]
+        return [["value":"publishedDate", "type": 1, "sort": false], ["value":"updatedDate", "type": 1, "sort": false]]
     }
     
     func saveNewsArticles(_ articles: [NewsArticleItem]) throws {

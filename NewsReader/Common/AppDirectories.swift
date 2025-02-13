@@ -14,7 +14,6 @@ struct AppDirectories {
         return urls.last!
     }()
     
-    
     static var applicationSupportDirectoryUrl: URL? = {
         let urls = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
         return urls.first
