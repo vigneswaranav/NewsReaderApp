@@ -8,27 +8,54 @@
 import XCTest
 
 final class NewsReaderUITests: XCTestCase {
-
+    
+    var app: XCUIApplication!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
+        app = XCUIApplication()
         app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+    override func tearDownWithError() throws {
+        app = nil
+    }
+    
+    @MainActor
+    func test_refreshFlow_displaysArticles() throws {
+        // Attempt to tap the refresh button
+        let refreshButton = app.buttons["RefreshButton"]
+        XCTAssertTrue(refreshButton.exists, "Refresh button should exist")
+        refreshButton.tap()
+        
+        // Wait for at least one cell in the list
+        let firstCell = app.tables.cells.firstMatch
+        let existsPredicate = NSPredicate(format: "exists == true")
+        
+        expectation(for: existsPredicate, evaluatedWith: firstCell, handler: nil)
+        waitForExpectations(timeout: 10, handler: {_ in 
+            // Verify at least one article cell appears
+            XCTAssertTrue(firstCell.exists, "At least one article cell should be visible after refresh")
+        })
+        
+        // Verify at least one article cell appears
+        XCTAssertTrue(firstCell.exists, "At least one article cell should be visible after refresh")
+    }
+    
+    @MainActor
+    func test_articleDetailNavigation() {
+        let firstCell = app.tables.cells.firstMatch
+        
+        if firstCell.waitForExistence(timeout: 5) {
+            firstCell.tap()
+            
+            // Check a label or identifier in the detail view
+            let detailTitle = app.staticTexts["DetailTitle"]
+            XCTAssertTrue(detailTitle.waitForExistence(timeout: 5),
+                          "Detail view should appear with a title label")
+        } else {
+            XCTFail("No table cell found to tap for detail navigation test")
+        }
     }
 
     @MainActor

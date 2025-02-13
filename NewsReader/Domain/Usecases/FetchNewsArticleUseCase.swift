@@ -9,7 +9,7 @@
 import Foundation
 
 struct FetchNewsArticleUseCase {
-    let repository: NewsArticleRepositoryImpl
+    let repository: NewsArticleRepositoryProtocol
     
     func execute() async -> Result<[NewsArticleItem], Error> {
         do {

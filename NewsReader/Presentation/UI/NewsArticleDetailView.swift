@@ -30,6 +30,7 @@ struct NewsArticleDetailView: View {
                 Text(item.title)
                     .font(.largeTitle)
                     .bold()
+                    .accessibilityIdentifier("DetailTitle")
                 Text(item.abstract)
                     .font(.body)
                 Text(item.author).font(.callout).lineLimit(2).foregroundStyle(.foreground).fontWeight(.semibold)
