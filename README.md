@@ -6,16 +6,23 @@ A SwiftUI application demonstrating a **Clean Architecture + MVVM** approach to 
 
 ## Table of Contents
 
-1. [Architecture Overview](#architecture-overview)  
-2. [Core Data Stack](#core-data-stack)  
-3. [Data Flow](#data-flow)  
-4. [Requirements](#requirements)  
-5. [Setup and Configuration](#setup-and-configuration)  
-6. [Build and Run](#build-and-run)  
-7. [Test Cases](#test-cases)
-8. [Demo](#demo)
+1. [Demo](#demo)
+2. [Architecture Overview](#architecture-overview)  
+3. [Core Data Stack](#core-data-stack)  
+4. [Data Flow](#data-flow)  
+5. [Requirements](#requirements)  
+6. [Setup and Configuration](#setup-and-configuration)  
+7. [Build and Run](#build-and-run)  
+8. [Test Cases](#test-cases) 
 
 ---
+
+## Demo
+
+Below is a quick demonstration of the NewsReader app in action.
+This GIF shows how tapping the refresh button fetches new articles, populates the list, and updates the detail view seamlessly.
+
+![NewsReader_Demo](https://github.com/user-attachments/assets/40a68449-79d2-48de-865e-516df54da404)
 
 ## Architecture Overview
 
@@ -107,9 +114,3 @@ No external third-party libraries. Only native Swift, SwiftUI, and Core Data.
 
 ## Test Cases
 
-## Demo
-
-Below is a quick demonstration of the NewsReader app in action.
-This GIF shows how tapping the refresh button fetches new articles, populates the list, and updates the detail view seamlessly.
-
-![NewsReader_Demo](https://github.com/user-attachments/assets/40a68449-79d2-48de-865e-516df54da404)
