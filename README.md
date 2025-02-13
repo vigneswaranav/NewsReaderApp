@@ -144,11 +144,11 @@ This project includes both **Unit Tests** and **UI Tests**, located in the **New
 
 2. **Location**  
    - Files are located under the `NewsReaderUITests/` folder.
-   - A typical test file might be `NewsReaderAppUITests.swift`.
+   - A typical test file might be `NewsReaderUITests.swift`.
 
 3. **Examples**  
    - **Refresh Flow**: Launch the app, tap the refresh button, wait for the list to populate, and confirm at least one article cell appears.  
-   - **Detail Flow**: Tap an article row, verify that the detail screen displays the correct title, abstract, and other metadata.
+   - **Detail Flow**: Tap an article row, verify that the detail screen displays the correct title.
 
 4. **How to Run**  
    - In Xcode, select **Product > Test** or press **Cmd + U**, ensuring that UI tests are included in your current scheme.  
