@@ -36,14 +36,14 @@ This app follows **Clean Architecture** principles with an **MVVM** presentation
 ## Core Data Stack
 
 - **PersistenceController**:  
-  Manages the `NSPersistentContainer`, ensuring persistent stores are loaded.  
+  Manages the `NSPersistentContainer` and database initialisation and ensures that persistent stores are created and loaded.  
   Provides a main (UI) context and optional background contexts for writes.
   
 - **FetchResultControllerObserver**:  
-  A generic observer wrapping `NSFetchedResultsController`, publishing entity updates to SwiftUI (allowing real-time list updates without manual reloads).
+  A generic observer wrapping `NSFetchedResultsController`, publishing entity updates to SwiftUI views (allowing real-time list updates without manual reloads).
 
 - **Handlers & Mappers**:
-  - **EntityModelMapperProtocol** defines how to map entities to domain models and back.  
+  - **EntityModelMapperProtocol** defines how to map entities to domain models and vice-versa.  
   - **DatabaseHandler** & sync handlers define how to perform CRUD operation on entities and conforms to **EntityModelMapperProtocol**.
 
 ---
@@ -54,11 +54,11 @@ This app follows **Clean Architecture** principles with an **MVVM** presentation
    `APIManager` uses a specific endpoint from `API Endpoints` to fetch JSON data from the NYTimes API.
 
 2. **Response Parsing & Mapping**:  
-   API response model objects (`NewsArticleModel`, `NewsArticleMediaModel`) are parsed, then mapped into domain models (`NewsArticleItem`, `NewsArticleMediaItem`).
+   API response model objects (`NewsArticleModel`, `NewsArticleMediaModel`) are parsed, then mapped to domain models (`NewsArticleItem`, `NewsArticleMediaItem`).
 
 3. **Repository**:  
-   - **NewsArticleRepositoryImpl** decides whether to fetch from remote or local.  
-   - If from remote, it parses/maps and saves into Core Data.  
+   - **NewsArticleRepositoryImpl** decides whether to fetch from remote API datasource or local datasource(Core Data).  
+   - If it is from remote API, it parses the response and maps to domain model objects and saves the entities into Core Data.  
    - Returns domain models to the **Use Case**.
 
 4. **Use Case**:  
@@ -69,7 +69,7 @@ This app follows **Clean Architecture** principles with an **MVVM** presentation
    - Changes in Core Data are observed via `FetchResultControllerObserver`, updating SwiftUI views in real-time.
 
 6. **UI**:  
-   - SwiftUI views observe published properties or the observer’s output, rendering a list of articles and a detail view.
+   - SwiftUI views observe published properties and the observer’s output, rendering a list of articles and a detail view.
 
 ---
 
