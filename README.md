@@ -114,3 +114,61 @@ No external third-party libraries. Only native Swift, SwiftUI, and Core Data.
 
 ## Test Cases
 
+This project includes both **Unit Tests** and **UI Tests**, located in the **NewsReaderTests** and **NewsReaderUITests** folders, respectively. These tests help ensure the code remains robust, covering core functionality (use cases, repositories, etc.) and end-to-end user interactions.
+
+### Unit Tests
+
+1. **Purpose**  
+   - Verify the correctness of use cases, domain logic, repositories, and mappers.  
+   - Ensure that fetching, saving, and mapping logic behave as expected, including error handling and edge cases.
+
+2. **Location**  
+   - Files are located under the `NewsReaderTests/` folder.
+   - Common filenames might include `UseCaseTests.swift`, `RepositoryTests.swift`, etc.
+
+3. **Examples**  
+   - **Use Case Tests**: Confirm that `FetchNewsArticleUseCase` retrieves local articles (if available) or fetches remote data when needed, and handles errors properly.  
+   - **Repository Tests**: Mock the network layer to simulate various API responses and verify that Core Data integration works correctly (often using an in-memory store for isolation).
+
+4. **How to Run**  
+   - In Xcode, select **Product > Test** or press **Cmd + U**.  
+   - Alternatively, open the Test Navigator (⌘ + 6) and run individual tests by clicking the diamond icon next to each test or test class.
+
+### UI Tests
+
+1. **Purpose**  
+   - Validate end-to-end user interactions, such as:  
+     - Tapping the refresh button to load new data.  
+     - Selecting an article to view details.  
+     - Handling error states or empty data scenarios.
+
+2. **Location**  
+   - Files are located under the `NewsReaderUITests/` folder.
+   - A typical test file might be `NewsReaderAppUITests.swift`.
+
+3. **Examples**  
+   - **Refresh Flow**: Launch the app, tap the refresh button, wait for the list to populate, and confirm at least one article cell appears.  
+   - **Detail Flow**: Tap an article row, verify that the detail screen displays the correct title, abstract, and other metadata.
+
+4. **How to Run**  
+   - In Xcode, select **Product > Test** or press **Cmd + U**, ensuring that UI tests are included in your current scheme.  
+   - Alternatively, run individual UI tests in the Test Navigator by clicking the diamond next to each test method or class.  
+   - The iOS Simulator (or a physical device) will launch and perform the scripted UI interactions automatically.
+
+### Code Coverage
+
+To view coverage for tests:
+
+1. **Enable Code Coverage**  
+   - In Xcode, go to **Product > Scheme > Edit Scheme...**  
+   - Select the **Test** action in the left sidebar, then expand the **Options** tab.  
+   - Check the **Gather coverage for** checkbox and ensure your test target(s) are selected.
+
+2. **Run Tests with Coverage**  
+   - Press **Cmd + U** or **Product > Test**.  
+   - Xcode will now collect code coverage data for the selected targets during testing.
+
+3. **View Coverage**  
+   - After the tests are completed, open the **Report Navigator** (⌘ + 9) in Xcode.  
+   - Select the most recent test run, then choose the **Coverage** tab in the center pane.  
+   - Expand modules and files to see coverage percentages and which lines of code are covered.
